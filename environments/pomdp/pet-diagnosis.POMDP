@@ -1,0 +1,108 @@
+# Veterinary POMDP for urinary tract issues in pets
+
+discount: 0.75
+
+values: reward
+
+states: infection bladder-crystals being-healthy
+
+actions: examination urinary-catheter antibiotics surgery
+
+costs: 0.5 2 0.25 5
+
+observations: dysuria urinary-incontinence vomiting
+
+# Transition probabilities
+
+# Format: T: action
+#         [state transition matrix]
+
+# Examination doesn't change the underlying condition
+
+T: examination
+1.0 0.0 0.0
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+# Urinary catheter helps with bladder-crystals but may cause infection
+
+T: urinary-catheter
+0.8 0.1 0.1
+0.3 0.6 0.1
+0.0 0.0 1.0
+
+# Antibiotics help with infection but don't affect other conditions
+
+T: antibiotics
+0.1 0.0 0.9
+0.0 1.0 0.0
+0.0 0.0 1.0
+
+
+# Surgery helps with all conditions but has risks (not recommended when the pet is already healthy)
+T: surgery
+0.05 0.05 0.9
+0.05 0.1 0.85
+0.6 0.0 0.4
+
+
+# Observation probabilities
+
+# Format: O: action
+#         [observation probabilities for each state]
+
+# Examination provides information about the condition
+
+O: examination
+0.2 0.5 0.3
+0.7 0.2 0.1
+0.1 0.1 0.8
+
+# Urinary catheter provides clearer information
+
+O: urinary-catheter
+0.1 0.8 0.1
+0.2 0.7 0.1
+0.1 0.1 0.8
+
+# Antibiotics provide information about whether infection is present
+
+O: antibiotics
+0.1 0.8 0.1
+0.7 0.2 0.1
+0.1 0.1 0.8
+
+# Surgery provides very clear information
+
+O: surgery
+0.1 0.8 0.1
+0.1 0.8 0.1
+0.1 0.1 0.8
+
+# Reward function
+
+# Format: R: action : state : next-state : observation reward
+
+# Examination rewards/costs
+
+R: examination : infection : * : * -2
+R: examination : bladder-crystals : * : * -2
+R: examination : being-healthy : * : * 0.1
+
+# Urinary catheter rewards/costs
+
+R: urinary-catheter : infection : * : * -4
+R: urinary-catheter : bladder-crystals : * : * 6
+R: urinary-catheter : being-healthy : * : * -2
+
+# Antibiotics rewards/costs
+
+R: antibiotics : infection : * : * 5
+R: antibiotics : bladder-crystals : * : * -1
+R: antibiotics : being-healthy : * : * 0
+
+# Surgery rewards/costs
+
+R: surgery : infection : * : * 2
+R: surgery : bladder-crystals : * : * 10
+R: surgery : being-healthy : * : * 0
