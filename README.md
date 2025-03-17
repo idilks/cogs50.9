@@ -2,7 +2,7 @@
 final project for cogs50.9, w25, idil sahin
 
 
- In order to construct a POMDP environment easily, [POMDP File Grammar](http://www.pomdp.org/code/pomdp-file-grammar.html) is used to encode environment dynamics.For the runner, solver and helper functions, credit to (Lu, 2018)(https://github.com/namoshizun/PyPOMDP)
+ In order to construct a POMDP environment easily, [POMDP File Grammar](http://www.pomdp.org/code/pomdp-file-grammar.html) is used to encode environment dynamics.For the runner, solver and helper functions, credit to [(Lu, 2018)](https://github.com/namoshizun/PyPOMDP)
 
 
 positional arguments:
