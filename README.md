@@ -1,4 +1,4 @@
-# cogs50.9: pomdps in healthcare
+# computational models of social cognition: pomdps in healthcare
 final project for cogs50.9, w25, idil sahin
 
 
